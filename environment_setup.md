@@ -24,21 +24,21 @@ Python is one of the most popular and beginner-friendly programming languages in
 
 ---
 
-## 3. Windows Subsystem for Linux (WSL)
+## 3. Git
+
+Git is a free, open-source version control system that tracks changes to your code over time. It allows you to save snapshots of your work, collaborate with others, revert mistakes, and manage different versions of a project — all from the command line or within VS Code. Git is an essential tool for any developer, and learning it early will help you build good habits around organizing and protecting your work as your projects grow in complexity.
+
+**Download and installation instructions:** [Git - Installing Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+
+---
+
+## 4. Windows Subsystem for Linux (WSL)
 
 Windows Subsystem for Linux (WSL) allows you to run a full Linux environment directly on your Windows machine — no virtual machine or dual-boot required. This is particularly important for AI and software development because many tools, libraries, and workflows are built with Linux in mind. With WSL, Windows users can run Linux commands, install Linux-based packages, and work in an environment that closely mirrors professional development and cloud computing environments.
 
 > **Important:** When following the installation instructions, make sure to open **PowerShell as an Administrator** before running any commands. Right-click the PowerShell icon and select *"Run as administrator"* to ensure the installation completes successfully.
 
 **Download and installation instructions:** [Install WSL | Microsoft Learn](https://learn.microsoft.com/en-us/windows/wsl/install)
-
----
-
-## 4. Git
-
-Git is a free, open-source version control system that tracks changes to your code over time. It allows you to save snapshots of your work, collaborate with others, revert mistakes, and manage different versions of a project — all from the command line or within VS Code. Git is an essential tool for any developer, and learning it early will help you build good habits around organizing and protecting your work as your projects grow in complexity.
-
-**Download and installation instructions:** [Git - Installing Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
 ---
 
