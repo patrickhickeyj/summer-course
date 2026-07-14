@@ -35,6 +35,8 @@
 
 # name = input('What is your name ') - allows you to interact with the script
 
+# note to myself about stuff that's happenig
+
 u_name = input('What is your name? ')
 u_number = float(input('What is your favorite number? '))
 print("Hello " + u_name)
