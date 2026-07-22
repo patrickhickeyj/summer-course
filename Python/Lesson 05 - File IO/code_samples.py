@@ -10,6 +10,9 @@ text_to_write = [
     "Here is another line.\n",
     "And yet another line.\n"
 ]
+
+#test
+
 #this syntax handles the file opening and closing automatically
 with open('output.txt', 'w') as file:
     for text in text_to_write:
