@@ -1,6 +1,17 @@
 from area import rect_area
 
-len = float(input("Enter the length:  "))
-wid = float(input("Enter the width:  "))
+try:
+    len = float(input("Enter the length:  "))
+    wid = float(input("Enter the width:  "))
+    rect_area(len, wid)
+except ValueError:
+    pass
+except ArithmeticError:
+    print("here's arithmetic")
+else:
+    print("No errors")
+finally:
+    print("This will always run")
 
-rect_area(len, wid)
+
+print("But this printed anyway")
