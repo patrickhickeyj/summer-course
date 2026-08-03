@@ -28,7 +28,7 @@ def process_reports(list):
         cat_list = entry.split('|')
         temp_name = cat_list[0].strip().title()
         temp_rank = cat_list[1].strip().upper()
-        temp_fit = cat_list[2].strip().split(':')[1]
+        temp_fit = int(cat_list[2].strip().split(':')[1])
         temp_dep = cat_list[3].strip().split(':')[1] == 'deployed'
         rank_list.append(temp_rank)
         soldier_dict[temp_name] = Soldier(temp_name, temp_rank, temp_fit, temp_dep)
