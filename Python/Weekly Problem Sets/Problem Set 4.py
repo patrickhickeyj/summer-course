@@ -34,7 +34,7 @@ def process_reports(list):
         soldier_dict[temp_name] = Soldier(temp_name, temp_rank, temp_fit, temp_dep)
     return soldier_dict, set(rank_list)
 
-def show_availabe(roster):
+def show_available(roster):
     name_list = []
     for key, value in roster.items():
         if value.deployed == False:
@@ -53,6 +53,26 @@ def dispatch(roster, name):
     else:
         print(f"{name} not found in roster")
 
+def fitness_report(roster):
+    low_list = []
+    med_list = []
+    high_list = []
+    for name, sol in roster.items():
+        if sol.fitness >= 80:
+            high_list.append(sol.name)
+        elif sol.fitness >= 60:
+            med_list.append(sol.name)
+        else:
+            low_list.append(sol.name)
+    low_list.sort()
+    med_list.sort()
+    high_list.sort()
+    new_dict = {
+        'high': high_list,
+        'medium': med_list,
+        'low': low_list
+    }
+    return new_dict
 #Testing
 if __name__ == "__main__":
     sold_test = Soldier('pat', 'maj', '80', False)
@@ -60,7 +80,9 @@ if __name__ == "__main__":
     sol_dict, rank_set = process_reports(reports)
     print(sol_dict)
     print(rank_set)
-    show_availabe(sol_dict)
+    show_available(sol_dict)
     dispatch(sol_dict, 'hickey')
     dispatch(sol_dict, 'Kowalski')
     dispatch(sol_dict, 'Santos')
+    fit_dict = fitness_report(sol_dict)
+    print(fit_dict)
