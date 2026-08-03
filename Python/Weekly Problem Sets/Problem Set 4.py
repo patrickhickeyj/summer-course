@@ -45,7 +45,7 @@ def show_available(roster):
 
 def dispatch(roster, name):
     if name.title() in roster:
-        hold = roster[name]
+        hold = roster[name.title()]
         if hold.deployed:
             print(f"{name.title()} is already deployed")
         else:
