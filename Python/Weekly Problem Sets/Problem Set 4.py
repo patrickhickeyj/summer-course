@@ -44,14 +44,14 @@ def show_available(roster):
         print(roster[name])
 
 def dispatch(roster, name):
-    if name in roster:
+    if name.title() in roster:
         hold = roster[name]
         if hold.deployed:
-            print(f"{name} is already deployed")
+            print(f"{name.title()} is already deployed")
         else:
             hold.dispatch()
     else:
-        print(f"{name} not found in roster")
+        print(f"{name.title()} not found in roster")
 
 def fitness_report(roster):
     low_list = []
