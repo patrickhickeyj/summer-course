@@ -256,11 +256,8 @@ def group_by_species(registry):
             spec_dict[species].append(value)
         else:
             spec_dict[species] = [value]
-    for key in spec_dict:
-        name_list = []
-        for animal in spec_dict[key]:
-            name_list.append(animal.name)
-        print(f'{key}\t: {", ".join(name_list)}')
+    return spec_dict
+
 
 #Testing
 if __name__ == "__main__":
@@ -305,7 +302,12 @@ if __name__ == "__main__":
             reg[user_animal].get_info()
         else:
             print(f'{user_animal} not found')
-        group_by_species(reg)
+        new_dict = group_by_species(reg)
+        for key in new_dict:
+            name_list = []
+            for animal in new_dict[key]:
+                name_list.append(animal.name)
+            print(f'{key}\t: {", ".join(name_list)}')
 
     # prob_1_test()
     # prob_2_test()
