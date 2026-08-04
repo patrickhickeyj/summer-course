@@ -235,6 +235,6 @@ if __name__ == "__main__":
         test_lyr.filter_stopwords(stop_words)
         test_lyr.print_report()
 
-    # prob_1_test()
-    # prob_2_test()
+    prob_1_test()
+    prob_2_test()
     prob_3_test()
