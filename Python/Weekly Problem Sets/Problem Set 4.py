@@ -199,7 +199,69 @@ class LyricAnalyzer():
         print(f'Most common word: "{w}" - {f} times')
 
 
-    
+#************************************* Prob 4 *********************************************************************
+
+raw_data = [
+    "Simba, lion, 7, Africa",
+    "Pebbles, penguin, 3, Antarctica",
+    "Kovu, lion, 4, Africa",
+    "Bubbles, dolphin, 12, Ocean",
+    "Mango, parrot, 6, South America",
+    "Nala, lion, 5, Africa",
+    "Splash, dolphin, 8, Ocean",
+    "Crackers, parrot, 2, South America",
+]
+
+class Animal():
+    def __init__(self, name, species, age, origin):
+        self.name = name
+        self.species = species
+        self.age = age
+        self.origin = origin
+
+    def __str__(self):
+        return(f'{self.name} ({self.species}, {self.age} years, from {self.origin})')
+
+    def get_info(self):
+        print(self)
+
+def build_registry(raw_data):
+    final_dict = {}
+    for item in raw_data:
+        holder = item.split(',')
+        new_hold = []
+        for entry in holder:
+            new_hold.append(entry.strip())
+        final_dict[new_hold[0]] = Animal(new_hold[0], new_hold[1], int(new_hold[2]), new_hold[3])
+    return final_dict
+
+def analyze_registry(registry):
+    print('===ZOO REGISTRY BUILT===')
+    print(f'There are {len(registry)} total animials registered.')
+    species_list = []
+    origin_list = []
+    for key, animal in registry.items():
+        species_list.append(animal.species)
+        origin_list.append(animal.origin)
+    spec_set = set(species_list)
+    origin_set = set(origin_list)
+    print(f'Unique species: {spec_set}')
+    print(f'Animals come from {len(origin_set)} distinct regions.')
+
+def group_by_species(registry):
+    spec_dict = {}
+    for key, value in registry.items():
+        species = value.species
+        if species in spec_dict:
+            spec_dict[species].append(value)
+        else:
+            spec_dict[species] = [value]
+    for key in spec_dict:
+        name_list = []
+        for animal in spec_dict[key]:
+            name_list.append(animal.name)
+        print(f'{key}\t: {", ".join(name_list)}')
+
 #Testing
 if __name__ == "__main__":
     def prob_1_test():
@@ -235,6 +297,17 @@ if __name__ == "__main__":
         test_lyr.filter_stopwords(stop_words)
         test_lyr.print_report()
 
-    prob_1_test()
-    prob_2_test()
-    prob_3_test()
+    def prob_4_test():
+        reg = build_registry(raw_data)
+        analyze_registry(reg)
+        user_animal = input('What animal do you want to lookup? ').title().strip()
+        if user_animal in reg:
+            reg[user_animal].get_info()
+        else:
+            print(f'{user_animal} not found')
+        group_by_species(reg)
+
+    # prob_1_test()
+    # prob_2_test()
+    # prob_3_test()
+    prob_4_test()
