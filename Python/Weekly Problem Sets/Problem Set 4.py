@@ -1,3 +1,5 @@
+import string
+
 #Problem 1
 reports = [
     "SANTOS | Private | Fitness:91 | Status:available",
@@ -134,6 +136,67 @@ def check_recipes(recipes, pantry):
     print(f'All unique ingredients ({len(ing_list)}): {ing_list}')
 
     
+#************************************* Prob 3 *********************************************************************
+lyrics = """
+we will we will rock you
+we will we will rock you
+buddy youre a boy make a big noise
+playing in the street gonna be a big man someday
+you got mud on your face you big disgrace
+kicking your can all over the place singing
+we will we will rock you
+"""
+
+stop_words = {"a", "the", "you", "your", "in", "on", "we", "be", "got"}
+
+class LyricAnalyzer():
+    def __init__(self, lyrics):
+        self.lyrics = lyrics
+        lower_case = lyrics.lower()
+        for char in lower_case:
+            if char in string.punctuation:
+                char = char.replace(char, '')
+        self.words = lower_case.replace('\n', ' ').strip().split(' ')
+
+    def filter_stopwords(self, stop_words):
+        blank_list = []
+        for word in self.words:
+            if word not in stop_words:
+                blank_list.append(word)
+        self.words = blank_list
+
+    def count_words(self):
+        hold_dict = {}
+        for word in self.words:
+            if word in hold_dict:
+                hold_dict[word] += 1
+            else:
+                hold_dict[word] = 1
+        return hold_dict
+    
+    def unique_word_count(self):
+        word_set = set(self.words)
+        return len(word_set)
+
+    def most_common_word(self):
+        word_dict = self.count_words()
+        temp_count = 0
+        ret_item = tuple()
+        for key, value in word_dict.items():
+            if value > temp_count:
+                temp_count = value
+                ret_item = (key, value)
+        return ret_item
+
+    def print_report(self):
+        print('== WORD COUNT ==')
+        alph_list = sorted(list(set(self.words)))
+        word_dict = self.count_words()
+        for word in alph_list:
+            print(f'{word}\t: {word_dict[word]}')
+        print(f'Unique words: {self.unique_word_count()}')
+        w, f = self.most_common_word()
+        print(f'Most common word: "{w}" - {f} times')
 
 
     
@@ -151,7 +214,7 @@ if __name__ == "__main__":
         dispatch(sol_dict, 'Santos')
         fit_dict = fitness_report(sol_dict)
         print(fit_dict)
-    prob_1_test()
+
     def prob_2_test():
         test_pant = Pantry(pantry_items)
         test_rec = create_recipes(recipe_data)
@@ -161,4 +224,17 @@ if __name__ == "__main__":
         new_list = [item.strip() for item in hold_list]
         test_pant.add_ingredients(new_list)
         check_recipes(test_rec, test_pant)
-    prob_2_test()
+
+    def prob_3_test():
+        test_lyr = LyricAnalyzer(lyrics)
+        print(test_lyr.words)
+        print(test_lyr.count_words())
+        print(test_lyr.unique_word_count())
+        print(test_lyr.most_common_word())
+        test_lyr.print_report()
+        test_lyr.filter_stopwords(stop_words)
+        test_lyr.print_report()
+
+    # prob_1_test()
+    # prob_2_test()
+    prob_3_test()
