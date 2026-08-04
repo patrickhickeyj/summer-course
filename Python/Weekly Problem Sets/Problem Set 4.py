@@ -105,8 +105,8 @@ class Pantry():
     def __init__(self, ingredients):
         self.ingredients = set(ingredients)
 
-    def get_items(self, ing):
-        return(set(ing))
+    def get_items(self):
+        return(set(self.ingredients))
 
     def add_ingredients(self, extra_ingredients):
         self.ingredients = set(extra_ingredients).union(self.ingredients)
