@@ -73,16 +73,89 @@ def fitness_report(roster):
         'low': low_list
     }
     return new_dict
+
+#************************************* Prob 2 *********************************************************************
+recipe_data = {
+    "omelette":        ["eggs", "butter", "salt", "pepper", "cheese"],
+    "pancakes":        ["flour", "eggs", "milk", "butter", "sugar", "salt"],
+    "tomato pasta":    ["pasta", "tomatoes", "garlic", "olive oil", "salt", "pepper"],
+    "grilled cheese":  ["bread", "cheese", "butter"],
+}
+
+pantry_items = ["eggs", "butter", "salt", "pepper", "cheese", "milk", "bread", "garlic"]
+
+class Recipe():
+    def __init__(self, name, ingredients):
+        self.name = name
+        self.ingredients = ingredients
+
+    def can_make(self, pantry_set):
+        ing_set = set(self.ingredients)
+        return ing_set == pantry_set.intersection(ing_set)
+
+    def missing_ingredients(self, pantry_set):
+        miss_list = []
+        for item in self.ingredients:
+            if item not in pantry_set:
+                miss_list.append(item)
+        miss_list.sort()
+        return miss_list
+
+class Pantry():
+    def __init__(self, ingredients):
+        self.ingredients = set(ingredients)
+
+    def add_ingredients(self, extra_ingredients):
+        self.ingredients = set(extra_ingredients).union(self.ingredients)
+
+    def has(self, ingredient):
+        return ingredient in self.ingredients
+
+def create_recipes(recipe_data):
+    rec_list = []
+    for key, value in recipe_data.items():
+        rec_list.append(Recipe(key, value))
+    return rec_list
+
+def check_recipes(recipes, pantry):
+    print('=== RECIPE CHECKER ===')
+    ing_set = set()
+    for item in recipes:
+        name = item.name
+        status = 'CAN MAKE' if item.can_make(pantry.ingredients) else f'MISSING - {item.missing_ingredients(pantry.ingredients)}'
+        print(f'{name}\t: {status}')
+        ing_set = ing_set.union(set(item.ingredients))
+    ing_list = list(ing_set)
+    ing_list.sort()
+    print()
+    print(f'All unique ingredients ({len(ing_list)}): {ing_list}')
+
+    
+
+
+    
 #Testing
 if __name__ == "__main__":
-    sold_test = Soldier('pat', 'maj', '80', False)
-    print(sold_test)
-    sol_dict, rank_set = process_reports(reports)
-    print(sol_dict)
-    print(rank_set)
-    show_available(sol_dict)
-    dispatch(sol_dict, 'hickey')
-    dispatch(sol_dict, 'Kowalski')
-    dispatch(sol_dict, 'Santos')
-    fit_dict = fitness_report(sol_dict)
-    print(fit_dict)
+    def prob_1_test():
+        sold_test = Soldier('pat', 'maj', '80', False)
+        print(sold_test)
+        sol_dict, rank_set = process_reports(reports)
+        print(sol_dict)
+        print(rank_set)
+        show_available(sol_dict)
+        dispatch(sol_dict, 'hickey')
+        dispatch(sol_dict, 'Kowalski')
+        dispatch(sol_dict, 'Santos')
+        fit_dict = fitness_report(sol_dict)
+        print(fit_dict)
+    prob_1_test()
+    def prob_2_test():
+        test_pant = Pantry(pantry_items)
+        test_rec = create_recipes(recipe_data)
+        check_recipes(test_rec, test_pant)
+        user = input("Give me a comma separated list of ingredients")
+        hold_list = user.split(',')
+        new_list = [item.strip() for item in hold_list]
+        test_pant.add_ingredients(new_list)
+        check_recipes(test_rec, test_pant)
+    prob_2_test()
