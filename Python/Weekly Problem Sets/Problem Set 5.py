@@ -1,9 +1,9 @@
 #Problem 1
 def recursive_squares(n):
     if type(n) != int:
-        return [0]
+        return []
     if n < 1:
-        return [0]
+        return []
     if n == 1:
         return [1]
     else:
@@ -31,6 +31,8 @@ def flatten(mixed_list):
     else:
         return flatten(mixed_list[0]) + flatten(mixed_list[1:])
 
+#Problem 2
+
 if __name__ == '__main__':
     def prob1():
         print(recursive_squares(5))
@@ -38,4 +40,9 @@ if __name__ == '__main__':
         print(palindrome_checker('aab'))
         print(length([5, 6, 7, 8]))
         print(flatten([1, [2, 3], [4], 5]))
+
+    def prob2():
+        pass
+    
     prob1()
+    prob2()
