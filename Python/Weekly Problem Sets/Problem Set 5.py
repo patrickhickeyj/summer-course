@@ -33,6 +33,30 @@ def flatten(mixed_list):
 
 #Problem 2
 
+def fibonacci(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
+
+def count_ways(n):
+    if n == 0:
+        return 1
+    if n == 1:
+        return 1
+    else:
+        return count_ways(n-2) + count_ways(n-1)
+
+def grid_paths(m, n):
+    if m == 1 or n ==1:
+        return 1
+    else:
+        return grid_paths(m, n-1) + grid_paths(m-1, n)
+
+
+
 if __name__ == '__main__':
     def prob1():
         print(recursive_squares(5))
@@ -42,7 +66,9 @@ if __name__ == '__main__':
         print(flatten([1, [2, 3], [4], 5]))
 
     def prob2():
-        pass
+        print(fibonacci(7))
+        print(count_ways(4))
+        print(grid_paths(3, 3))
     
     prob1()
     prob2()
