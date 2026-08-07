@@ -94,9 +94,9 @@ def get_user(user_id: int) -> dict:
         return holder.json()
 
 
-def create_user(user_dict):
+def create_user(name, job):
     bridge = "/users"
-    create_holder = requests.post(base + bridge, user_dict)
+    create_holder = requests.post(base + bridge, {"name": name, "job": job})
     if create_holder.status_code != 201:
         print(create_holder.status_code)
         return {}
@@ -159,7 +159,7 @@ if __name__ == "__main__":
     def prob3():
         print(get_user(4))
         example_user = {"name": "pat", "job": "army"}
-        print(create_user(example_user))
+        print(create_user("pat", "army"))
         print(update_user(3, "pat", "job"))
         print(delete_user(3))
         print(get_users_page(2))
