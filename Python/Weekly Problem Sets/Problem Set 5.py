@@ -121,21 +121,24 @@ def delete_user(user_id):
     return del_dict.status_code == 200
 
 
-def get_all_users():
-    page = 1
+def get_users_page(page):
     bridge = f"?page={page}"
-    bridge2 = f"?page=2"
     header = {"x-api-key": "free_user_3Hb3S2tmGt30vw7rrZkQcl8go3q"}
     chal_page = requests.get(chal_base + bridge, headers=header)
-    auto_fix = requests.get(chal_base + bridge2, headers=header)
-    final_list = chal_page.json()["data"] + auto_fix.json()["data"]
-    temp_list = final_list[:10]
-    for item in temp_list:
-        item["name"] = item["first_name"]
     if chal_page.status_code != 200:
         return []
     else:
-        return temp_list
+        return chal_page.json()["data"]
+
+
+def get_all_users():
+    pages = [1, 2]
+    hold_list = []
+    for num in pages:
+        hold_list += get_users_page(num)
+
+    temp_list = hold_list[:10]
+    return temp_list
 
 
 def partial_update_user(user_id, updates):
