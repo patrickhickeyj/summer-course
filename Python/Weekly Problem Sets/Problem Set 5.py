@@ -129,10 +129,13 @@ def get_all_users():
     chal_page = requests.get(chal_base + bridge, headers=header)
     auto_fix = requests.get(chal_base + bridge2, headers=header)
     final_list = chal_page.json()["data"] + auto_fix.json()["data"]
+    temp_list = final_list[:10]
+    for item in temp_list:
+        item["name"] = item["first_name"]
     if chal_page.status_code != 200:
         return []
     else:
-        return final_list[:10]
+        return temp_list
 
 
 def partial_update_user(user_id, updates):
