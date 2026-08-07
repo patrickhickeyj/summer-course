@@ -121,7 +121,7 @@ def delete_user(user_id):
     return del_dict.status_code == 200
 
 
-def get_users_page(page):
+def get_all_users_page(page):
     bridge = f"?page={page}"
     header = {"x-api-key": "free_user_3Hb3S2tmGt30vw7rrZkQcl8go3q"}
     chal_page = requests.get(chal_base + bridge, headers=header)
@@ -162,7 +162,7 @@ if __name__ == "__main__":
         print(create_user("pat", "army"))
         print(update_user(3, "pat", "job"))
         print(delete_user(3))
-        print(get_users_page(2))
+        print(get_all_users_page(2))
         print(partial_update_user(2, {"job": "Senior Developer"}))
 
     # prob1()
