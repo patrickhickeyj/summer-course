@@ -132,7 +132,7 @@ def get_all_users():
     if chal_page.status_code != 200:
         return []
     else:
-        return final_list[:11]
+        return final_list[:10]
 
 
 def partial_update_user(user_id, updates):
