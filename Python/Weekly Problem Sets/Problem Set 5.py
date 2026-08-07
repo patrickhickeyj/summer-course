@@ -136,8 +136,9 @@ def get_all_users():
     hold_list = []
     for num in pages:
         hold_list += get_users_page(num)
-
     temp_list = hold_list[:10]
+    for user in temp_list:
+        user["name"] = f"{user['first_name']} {user['last_name']}"
     return temp_list
 
 
