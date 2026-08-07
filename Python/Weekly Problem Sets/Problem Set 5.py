@@ -55,6 +55,17 @@ def grid_paths(m, n):
     else:
         return grid_paths(m, n-1) + grid_paths(m-1, n)
 
+def permutation(perm_list):
+    if not perm_list:
+        return []
+    else:
+        holder = []
+        for i in range(len(perm_list)):
+            hold = perm_list[i]
+            clone = perm_list[:]
+            del clone[i]
+            holder.append([hold] + permutation(clone))
+        return holder
 
 
 if __name__ == '__main__':
@@ -69,6 +80,6 @@ if __name__ == '__main__':
         print(fibonacci(7))
         print(count_ways(4))
         print(grid_paths(3, 3))
-    
+        print(permutation([1, 2, 3]))
     prob1()
     prob2()
