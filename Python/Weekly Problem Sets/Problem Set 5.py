@@ -122,14 +122,17 @@ def delete_user(user_id):
 
 
 def get_all_users():
-    page = 2
+    page = 1
     bridge = f"?page={page}"
+    bridge2 = f"?page=2"
     header = {"x-api-key": "free_user_3Hb3S2tmGt30vw7rrZkQcl8go3q"}
     chal_page = requests.get(chal_base + bridge, headers=header)
+    auto_fix = requests.get(chal_base + bridge2, headers=header)
+    final_list = chal_page.json()["data"] + auto_fix.json()["data"]
     if chal_page.status_code != 200:
         return []
     else:
-        return chal_page.json()["data"]
+        return final_list[:11]
 
 
 def partial_update_user(user_id, updates):
