@@ -4,14 +4,16 @@ try:
     len = float(input("Enter the length:  "))
     wid = float(input("Enter the width:  "))
     rect_area(len, wid)
-except ValueError:
+except ValueError as e:
+    print(f"{e} You got a ValueError")
+except ZeroDivisionError:
     pass
-except ArithmeticError:
-    print("here's arithmetic")
+except:
+    print("There was some other error")
 else:
-    print("No errors")
+    print("No errors!!!!")
 finally:
-    print("This will always run")
+    print("This always runs!")
+    raise FileNotFoundError
 
-
-print("But this printed anyway")
+print("The rest of the program!")
